@@ -48,6 +48,14 @@ public class ClientService {
         return new ClientDTO(entity);
     }
 
+    @Transactional
+    public void delete(Long id) {
+        if (!clientRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Client not found");
+        }
+        clientRepository.deleteById(id);
+    }
+
     private void copyDtoToEntity(ClientDTO dto, Client entity) {
         entity.setName(dto.getName());
         entity.setCpf(dto.getCpf());
