@@ -4,6 +4,8 @@ import com.example.clients.entity.Client;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 
+import java.time.LocalDate;
+
 public class ClientDTO {
 
     private Long id;
@@ -17,14 +19,14 @@ public class ClientDTO {
     private Double income;
 
     @PastOrPresent(message = "Invalid Birth Date")
-    private String birthDate;
+    private LocalDate birthDate;
 
     private Integer children;
 
     public ClientDTO() {
     }
 
-    public ClientDTO(Long id, String name, String cpf, Double income, String birthDate, Integer children) {
+    public ClientDTO(Long id, String name, String cpf, Double income, LocalDate birthDate, Integer children) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -38,7 +40,7 @@ public class ClientDTO {
         name = entity.getName();
         cpf = entity.getCpf();
         income = entity.getIncome();
-        birthDate = entity.getBirthDate().toString();
+        birthDate = entity.getBirthDate();
         children = entity.getChildren();
     }
 
@@ -58,7 +60,7 @@ public class ClientDTO {
         return income;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
